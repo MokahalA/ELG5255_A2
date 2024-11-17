@@ -359,3 +359,23 @@ plt.ylabel("Actual")
 
 plt.tight_layout()
 plt.show()
+
+
+
+conf_matrix_hybrid = confusion_matrix(y_test_legitimate, y_pred_hybrid)
+f1_hybrid = f1_score(y_test_legitimate, y_pred_hybrid, average='weighted')
+print("Hybrid Approach (Supervised + Legitimate Clusters)")
+print("\nConfusion Matrix:\n", conf_matrix_hybrid)
+print("\nClassification Report:\n", classification_report(y_test_legitimate, y_pred_hybrid))
+
+# Plot the confusion matrix for the hybrid approach
+plt.figure(figsize=(6, 5))
+sns.heatmap(conf_matrix_hybrid, annot=True, fmt='d', cmap='Greens', cbar=False)
+plt.title(f"Hybrid Confusion Matrix\nF1 Score: {f1_hybrid:.3f}")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.show()
+
+# Print comparison of F1 scores
+print(f"Purely Supervised F1 Score: {f1_supervised:.3f}")
+print(f"Hybrid Approach F1 Score: {f1_hybrid:.3f}")
